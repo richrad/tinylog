@@ -3,8 +3,7 @@
 #rich@smalldefeats.com
 
 #Settings!
-TINY_PATH=~/dropbox/.tinylog
-TEXT_EDITOR=mate
+source 'tinysettings.cfg'
 
 #Functions!
 function init {
@@ -29,20 +28,6 @@ function new {
 	fi	
 }
 
-function open {
-	aescrypt -d -p "" tinylog.tar.gz.aes
-	tar -zxf tinylog.tar.gz -C /
-	rm -r tinylog.tar.gz
-	rm -r tinylog.tar.gz.aes
-}
-
-function close {
-	tar -zcf $TINY_PATH/tinylog.tar.gz $TINY_PATH
-	aescrypt -e -p "" tinylog.tar.gz
-	rm -r tinylog.tar.gz
-	rm -r $TINY_PATH
-}
-
 #Arguments!
 case "$1" in
 	"init") init
@@ -50,9 +35,5 @@ case "$1" in
 	"new")	new
 	;;
 	"") tree $TINY_PATH
-	;;
-	"close") close
-	;;
-	"open") open
 	;;
 esac
