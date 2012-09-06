@@ -20,6 +20,10 @@ Displays the directory structure of your entries.
    
 Creates a new entry.
 
+    tinylog open YEAR/MONTH/FILE
+	
+Opens the specified entry.
+
 
 #Customize
 

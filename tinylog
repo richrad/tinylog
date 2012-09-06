@@ -28,6 +28,10 @@ function new {
 	fi	
 }
 
+function open {
+	$TEXT_EDITOR $PATH_TO_OPEN
+}
+
 #Arguments!
 case "$1" in
 	"init") init
@@ -35,5 +39,8 @@ case "$1" in
 	"new")	new
 	;;
 	"") tree $TINY_PATH
+	;;
+	"open") PATH_TO_OPEN=$TINY_PATH/$2
+			open
 	;;
 esac
