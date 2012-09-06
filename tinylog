@@ -3,7 +3,7 @@
 #rich@smalldefeats.com
 
 #Settings!
-TINY_PATH=~/dropbox/my_tinylog
+TINY_PATH=~/dropbox/.tinylog
 TEXT_EDITOR=mate
 
 #Functions!
@@ -37,7 +37,7 @@ function open {
 }
 
 function close {
-	tar -zcf tinylog.tar.gz $TINY_PATH
+	tar -zcf $TINY_PATH/tinylog.tar.gz $TINY_PATH
 	aescrypt -e -p "" tinylog.tar.gz
 	rm -r tinylog.tar.gz
 	rm -r $TINY_PATH
