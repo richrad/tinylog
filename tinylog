@@ -30,13 +30,16 @@ function new {
 }
 
 function open {
-	
-	aescrypt -d -p $2 $TINY_PATH.aes
+	aescrypt -d -p "" tinylog.tar.gz.aes
+	tar -zxf tinylog.tar.gz -C /
+	rm -r tinylog.tar.gz
+	rm -r tinylog.tar.gz.aes
 }
 
 function close {
-	tar -zcf $TINY_PATH.tar.gz $TINY_PATH
-	aescrypt -e -p $2 $TINY_PATH.tar.gz
+	tar -zcf tinylog.tar.gz $TINY_PATH
+	aescrypt -e -p "" tinylog.tar.gz
+	rm -r tinylog.tar.gz
 	rm -r $TINY_PATH
 }
 
