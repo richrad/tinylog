@@ -1,0 +1,55 @@
+#!/bin/bash
+#tinylog
+#rich@smalldefeats.com
+
+#Settings!
+TINY_PATH=~/dropbox/my_tinylog
+TEXT_EDITOR=mate
+
+#Functions!
+function init {
+	if [ -d $TINY_PATH ]; then
+		echo $TINY_PATH already exists.
+	else
+		mkdir $TINY_PATH
+	fi
+}
+
+function new {
+	YEAR=$(date +"%Y")
+	MONTH=$(date +"%B")
+	NEW_PATH=$TINY_PATH/$YEAR/$MONTH
+	NEW_NAME=$(date +"%d_%k_%m_%S")
+	
+	if [ -d $NEW_PATH ]; then
+		$TEXT_EDITOR $NEW_PATH/$NEW_NAME.txt
+	else
+		mkdir -p $NEW_PATH
+		$TEXT_EDITOR $NEW_PATH/$NEW_NAME.txt
+	fi	
+}
+
+function open {
+	
+	aescrypt -d -p $2 $TINY_PATH.aes
+}
+
+function close {
+	tar -zcf $TINY_PATH.tar.gz $TINY_PATH
+	aescrypt -e -p $2 $TINY_PATH.tar.gz
+	rm -r $TINY_PATH
+}
+
+#Arguments!
+case "$1" in
+	"init") init
+	;;
+	"new")	new
+	;;
+	"") tree $TINY_PATH
+	;;
+	"close") close
+	;;
+	"open") open
+	;;
+esac
