@@ -32,6 +32,21 @@ function open {
 	$TEXT_EDITOR $PATH_TO_OPEN
 }
 
+function lock {
+	tar -czf /tmp/tinylog.tar.gz -C $TINY_PATH .
+	aescrypt -e -p "" /tmp/tinylog.tar.gz
+	rm /tmp/tinylog.tar.gz
+	rm -r $TINY_PATH/*
+	mv /tmp/tinylog.tar.gz.aes $TINY_PATH/tinylog.tar.gz.aes
+}
+
+function unlock {
+	aescrypt -d -p "" $TINY_PATH/tinylog.tar.gz.aes
+	tar -xzf $TINY_PATH/tinylog.tar.gz -C $TINY_PATH
+	rm $TINY_PATH/tinylog.tar.gz
+	rm $TINY_PATH/tinylog.tar.gz.aes
+}
+
 #Arguments!
 case "$1" in
 	"init") init
@@ -42,5 +57,9 @@ case "$1" in
 	;;
 	"open") PATH_TO_OPEN=$TINY_PATH/$2
 			open
+	;;
+	"lock") lock
+	;;
+	"unlock") unlock
 	;;
 esac

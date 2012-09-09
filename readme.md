@@ -4,7 +4,8 @@ A command-line utility for keeping a private diary.
 
 #Requirements
 
-*tree
+* tree
+* aescrypt
 	
 #Usage
 
@@ -24,14 +25,17 @@ Creates a new entry.
 	
 Opens the specified entry.
 
+    tinylog lock
+	
+Encrypts the contents of your tinylog directory. You'll be prompted to create a password.
+
+    tinylog unlock
+	
+Decrypts your tinylog.
 
 #Customize
 
 You can change the default text editor and file path in tinysettings.cfg.
-
-#To Do
-
-Archiving and encryption are at the top of the list.
 
 #Copying
 
